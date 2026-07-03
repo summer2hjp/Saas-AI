@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/auth";
@@ -19,6 +19,7 @@ export default function LoginPage({ params }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const turnstileRef = useRef<HTMLDivElement>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +28,8 @@ export default function LoginPage({ params }: Props) {
       const { error } = await authClient.signIn.email({
         email,
         password,
+        // Turnstile token is handled by the better-auth turnstile plugin
+        // which automatically injects it if the widget is rendered
       });
       if (error) {
         toast.error(error.message);
@@ -92,6 +95,10 @@ export default function LoginPage({ params }: Props) {
                 required
               />
             </div>
+
+            {/* Turnstile widget container — better-auth turnstile plugin injects here */}
+            <div ref={turnstileRef} id="turnstile-widget" />
+
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? t("common.loading") : t("auth.login")}
             </Button>

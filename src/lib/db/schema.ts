@@ -208,15 +208,24 @@ export const files = pgTable("files", {
 
 // ─── Email Subscriptions ─────────────────────────────────────────────────────
 
-export const emailSubscriptions = pgTable("email_subscriptions", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  tenantId: uuid("tenant_id")
-    .notNull()
-    .references(() => tenants.id, { onDelete: "cascade" }),
-  email: varchar("email", { length: 255 }).notNull(),
-  subscribed: boolean("subscribed").default(true).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+export const emailSubscriptions = pgTable(
+  "email_subscriptions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    email: varchar("email", { length: 255 }).notNull(),
+    subscribed: boolean("subscribed").default(true).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => ({
+    emailTenantIdx: uniqueIndex("email_tenant_idx").on(
+      table.email,
+      table.tenantId,
+    ),
+  }),
+);
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
