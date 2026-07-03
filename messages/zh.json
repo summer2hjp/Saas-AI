@@ -1,0 +1,74 @@
+{
+  "common": {
+    "app_name": "SaaS 应用",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "search": "搜索",
+    "no_results": "未找到结果",
+    "confirm": "确认",
+    "back": "返回",
+    "next": "下一步",
+    "submit": "提交",
+    "close": "关闭"
+  },
+  "nav": {
+    "home": "首页",
+    "pricing": "定价",
+    "blog": "博客",
+    "dashboard": "控制台",
+    "admin": "管理",
+    "profile": "个人资料",
+    "sign_in": "登录",
+    "sign_up": "注册",
+    "sign_out": "退出"
+  },
+  "auth": {
+    "email": "邮箱",
+    "password": "密码",
+    "name": "姓名",
+    "login": "登录",
+    "register": "创建账户",
+    "magic_link": "发送魔法链接",
+    "magic_link_sent": "请查看您的邮箱中的魔法链接",
+    "google": "使用 Google 登录",
+    "github": "使用 GitHub 登录",
+    "logout": "退出登录",
+    "turnstile_error": "请验证您不是机器人",
+    "forgot_password": "忘记密码？"
+  },
+  "pricing": {
+    "title": "定价方案",
+    "subtitle": "选择适合您的方案",
+    "monthly": "按月",
+    "yearly": "按年",
+    "subscribe": "订阅",
+    "current_plan": "当前方案",
+    "features": "功能"
+  },
+  "dashboard": {
+    "title": "控制台",
+    "welcome": "欢迎回来，{name}",
+    "overview": "概览",
+    "recent_activity": "最近活动"
+  },
+  "admin": {
+    "title": "管理后台",
+    "users": "用户管理",
+    "plans": "方案管理",
+    "cms": "内容管理",
+    "files": "文件管理",
+    "settings": "系统设置"
+  },
+  "user": {
+    "profile": "个人资料",
+    "subscription": "订阅管理",
+    "billing": "账单历史",
+    "usage": "使用量",
+    "credits": "积分"
+  }
+}

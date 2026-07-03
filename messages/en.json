@@ -1,0 +1,74 @@
+{
+  "common": {
+    "app_name": "SaaS App",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "no_results": "No results found",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "profile": "Profile",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "sign_out": "Sign Out"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "login": "Sign In",
+    "register": "Create Account",
+    "magic_link": "Send Magic Link",
+    "magic_link_sent": "Check your email for the magic link",
+    "google": "Continue with Google",
+    "github": "Continue with GitHub",
+    "logout": "Sign Out",
+    "turnstile_error": "Please verify you are human",
+    "forgot_password": "Forgot password?"
+  },
+  "pricing": {
+    "title": "Pricing Plans",
+    "subtitle": "Choose the plan that fits your needs",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "subscribe": "Subscribe",
+    "current_plan": "Current Plan",
+    "features": "Features"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back, {name}",
+    "overview": "Overview",
+    "recent_activity": "Recent Activity"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "users": "Users",
+    "plans": "Plans",
+    "cms": "Content",
+    "files": "Files",
+    "settings": "Settings"
+  },
+  "user": {
+    "profile": "Profile",
+    "subscription": "Subscription",
+    "billing": "Billing",
+    "usage": "Usage",
+    "credits": "Credits"
+  }
+}
