@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/auth";
@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const turnstileRef = useRef<HTMLDivElement>(null);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,6 +76,10 @@ export default function RegisterPage() {
                 minLength={8}
               />
             </div>
+
+            {/* Turnstile widget — better-auth plugin handles injection */}
+            <div ref={turnstileRef} id="turnstile-widget" />
+
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? t("common.loading") : t("auth.register")}
             </Button>

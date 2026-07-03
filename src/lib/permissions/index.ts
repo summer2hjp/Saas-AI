@@ -1,8 +1,35 @@
-export function getTenantId(): string | null {
-  // In a real app this reads from the session/context
-  // Placeholder — will be populated by middleware
-  return null;
-}
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { cache } from "react";
+
+/**
+ * Get the current tenant ID from the session.
+ * Uses React cache to avoid redundant session lookups within a single render.
+ */
+export const getTenantId = cache(async (): Promise<string | null> => {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    return session?.user?.tenantId ?? null;
+  } catch {
+    return null;
+  }
+});
+
+/**
+ * Get the current user's role from the session.
+ */
+export const getUserRole = cache(async (): Promise<string | null> => {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    return session?.user?.role ?? null;
+  } catch {
+    return null;
+  }
+});
 
 export function requireAdmin(role: string): void {
   if (role !== "super_admin" && role !== "admin") {

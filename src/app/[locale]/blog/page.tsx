@@ -1,26 +1,63 @@
 import { getTranslations } from "next-intl/server";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { db } from "@/lib/db";
+import { content } from "@/lib/db/schema";
+import { eq, desc, and } from "drizzle-orm";
 
 async function getBlogPosts(locale: string) {
-  const posts = [
-    {
-      id: "1",
-      title: locale === "zh" ? "欢迎使用SaaS平台" : "Welcome to SaaS Platform",
-      excerpt: locale === "zh"
-        ? "探索我们多租户SaaS平台的核心功能"
-        : "Explore the core features of our multi-tenant SaaS platform",
-      date: "2026-07-01",
-    },
-    {
-      id: "2",
-      title: locale === "zh" ? "安全最佳实践" : "Security Best Practices",
-      excerpt: locale === "zh"
-        ? "了解如何保护您的多租户应用"
-        : "Learn how to secure your multi-tenant application",
-      date: "2026-06-28",
-    },
-  ];
-  return posts;
+  try {
+    const posts = await db
+      .select({
+        id: content.id,
+        title: content.title,
+        excerpt: content.excerpt,
+        publishedAt: content.publishedAt,
+      })
+      .from(content)
+      .where(
+        and(
+          eq(content.visibility, "public"),
+          eq(content.categoryId, null), // blog posts are content without a category
+        ),
+      )
+      .orderBy(desc(content.publishedAt))
+      .limit(20);
+
+    return posts.map((post) => ({
+      id: post.id,
+      title: post.title,
+      excerpt: post.excerpt ?? "",
+      date: post.publishedAt
+        ? new Date(post.publishedAt).toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0],
+      hasContent: true,
+    }));
+  } catch {
+    // Fallback content if DB is not available
+    return [
+      {
+        id: "default-1",
+        title: locale === "zh" ? "欢迎使用SaaS平台" : "Welcome to SaaS Platform",
+        excerpt:
+          locale === "zh"
+            ? "探索我们多租户SaaS平台的核心功能"
+            : "Explore the core features of our multi-tenant SaaS platform",
+        date: "2026-07-01",
+        hasContent: false,
+      },
+      {
+        id: "default-2",
+        title:
+          locale === "zh" ? "安全最佳实践" : "Security Best Practices",
+        excerpt:
+          locale === "zh"
+            ? "了解如何保护您的多租户应用"
+            : "Learn how to secure your multi-tenant application",
+        date: "2026-06-28",
+        hasContent: false,
+      },
+    ];
+  }
 }
 
 interface Props {
