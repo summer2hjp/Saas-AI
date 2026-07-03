@@ -63,7 +63,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install --no-audit --no-fund
       - run: npm run build
         env:
           DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/saas_app
